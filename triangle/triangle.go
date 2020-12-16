@@ -1,19 +1,20 @@
-// This is a "stub" file.  It's a little start on your solution.
-// It's not a complete solution though; you have to write some code.
-
-// Package triangle should have a package comment that summarizes what it's about.
-// https://golang.org/doc/effective_go.html#commentary
+// Package triangle is a utility for determining what kind of triangle
 package triangle
 
-// Notice KindFromSides() returns this type. Pick a suitable data type.
+import "math"
+
+// Kind is the type of triangle
 type Kind int
 
 const (
-	// Pick values for the following identifiers used by the test program.
-	NaT = -1 // not a triangle
-	Equ = 0  // equilateral
-	Iso = 1  // isosceles
-	Sca = 2  // scalene
+	// NaT is not a triangle
+	NaT = -1
+	// Equ is equilateral triangle
+	Equ = 0
+	// Iso is isosceles triangle
+	Iso = 1
+	// Sca is scalene triangle
+	Sca = 2
 )
 
 // KindFromSides should have a comment documenting it.
@@ -23,5 +24,55 @@ func KindFromSides(a, b, c float64) (k Kind) {
 	// They're here to help you get started but they only clutter a finished solution.
 	// If you leave them in, reviewers may protest!
 
-	return k
+	// Check if not a triangle
+	if !isTriangle(a, b, c) {
+		return NaT
+	}
+
+	// Assume scalene at first
+	numSidesSame := 2
+
+	// Subtract one for every equal side
+	if a == b || a == c {
+		numSidesSame--
+	}
+	if b == c {
+		numSidesSame--
+	}
+
+	return Kind(numSidesSame)
+}
+
+func isTriangle(a, b, c float64) bool {
+	// Any side is NaN
+	if !isReal(a) || !isReal(b) || !isReal(c) {
+		return false
+	}
+
+	// Any side has no length
+	if a <= 0 || b <= 0 || c <= 0 {
+		return false
+	}
+
+	// One side is way too long
+	if a+b < c || a+c < b || b+c < a {
+		return false
+	}
+
+	return true
+}
+
+// isReal checks if a float is a real number
+func isReal(n float64) bool {
+	if math.IsNaN(n) {
+		return false
+	}
+	if math.IsInf(n, 1) {
+		return false
+	}
+	if math.IsInf(n, -1) {
+		return false
+	}
+
+	return true
 }
