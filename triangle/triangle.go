@@ -45,7 +45,7 @@ func KindFromSides(a, b, c float64) (k Kind) {
 
 func isTriangle(a, b, c float64) bool {
 	// Any side is NaN
-	if !isReal(a) || !isReal(b) || !isReal(c) {
+	if !isReal(a + b + c) {
 		return false
 	}
 
