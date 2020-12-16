@@ -8,13 +8,13 @@ type Kind int
 
 const (
 	// NaT is not a triangle
-	NaT = -1
+	NaT Kind = iota
 	// Equ is equilateral triangle
-	Equ = 0
+	Equ
 	// Iso is isosceles triangle
-	Iso = 1
+	Iso
 	// Sca is scalene triangle
-	Sca = 2
+	Sca
 )
 
 // KindFromSides should have a comment documenting it.
@@ -30,7 +30,7 @@ func KindFromSides(a, b, c float64) (k Kind) {
 	}
 
 	// Assume scalene at first
-	numSidesSame := 2
+	numSidesSame := 3
 
 	// Subtract one for every equal side
 	if a == b || a == c {
