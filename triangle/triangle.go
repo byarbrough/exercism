@@ -67,10 +67,7 @@ func isReal(n float64) bool {
 	if math.IsNaN(n) {
 		return false
 	}
-	if math.IsInf(n, 1) {
-		return false
-	}
-	if math.IsInf(n, -1) {
+	if math.IsInf(n, 0) {
 		return false
 	}
 
