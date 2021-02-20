@@ -11,8 +11,8 @@ func Distance(a, b string) (int, error) {
 
 	distance := 0
 	// iterate over strings
-	for pos, char := range a {
-		if char != rune(b[pos]) {
+	for i := range a {
+		if string([]rune(a)[i]) != string([]rune(b)[i]) {
 			distance++
 		}
 	}

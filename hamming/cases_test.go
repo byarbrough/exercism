@@ -64,4 +64,16 @@ var testCases = []struct {
 		0,
 		true,
 	},
+	{ // non-ASCII identical
+		"خ",
+		"خ",
+		0,
+		false,
+	},
+	{ // non-ASCII mismatch
+		"خ",
+		"A",
+		1,
+		true,
+	},
 }
