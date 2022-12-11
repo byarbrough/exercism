@@ -16,7 +16,6 @@
 
 # Exercism
 .exercism/
-go/
 
 # Because I am breaking typical go structure to match exercism
 go.sum
